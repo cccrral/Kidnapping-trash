@@ -3,142 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6인의 쓰레기들</title>
-	
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Noto+Serif+KR:wght@200..900&family=Song+Myung&display=swap" rel="stylesheet">
-
+    <title>The Covenant Manor</title>
     <style>
-        /* Base Styles */
         :root {
-            --dark-bg: #0a0a0f;
-            --dark-accent: #1a171e;
-            --light-accent: #3a2e42;
-            --highlight: #6e2e4d;
-            --text: #d1c7d6;
-            --title: #a27e9e;
-            --gold: #b5935a;
+            --primary-dark: #0d0d0e;
+            --secondary-dark: #1a1a1d;
+            --accent-dark: #2c2c34;
+            --text-color: #e6e6e6;
+            --accent-color: #8a0303;
+            --gold-accent: #b38728;
+            --shadow-color: rgba(0, 0, 0, 0.8);
+            --card-border: #3c3c44;
         }
         
-        body, html {
+        * {
             margin: 0;
             padding: 0;
-            background-color: rgb(18,18,18,0.6);
-            color: var(--text);
-            font-family: "Noto Serif KR", serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-			position: relative;
+            box-sizing: border-box;
         }
-		
-		body::before {
-			content: ''; /* 가상 요소에는 항상 content 속성이 필요합니다. */
-			position: fixed; /* 화면 전체에 고정되도록 (스크롤해도 배경은 고정) */
-			/* 또는 position: absolute; 로 하고 body가 100% 높이를 갖도록 할 수도 있습니다. */
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/chat.png?raw=true');
-			background-size: cover; /* 이미지가 영역을 꽉 채우도록 */
-			background-position: center center; /* 이미지를 중앙에 위치 */
-			background-repeat: no-repeat; /* 이미지가 반복되지 않도록 */
-			opacity: 0.8; /* 원하는 투명도 (0.3 = 30%, 0.35 = 35%, 0.4 = 40%) */
-			z-index: -1; /* 내용(텍스트, 카드 등)보다 뒤에, body의 background-color보다는 위에 위치하도록 */
-		}
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-color);
+            font-family: 'Crimson Text', Georgia, serif;
+            line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23201c1c' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-			position: relative;
-			z-index: 1;
         }
         
         header {
-			text-align: center;
-			padding: 60px 20px;
-			position: relative; /* ::before 요소의 위치 기준으로 사용됩니다. 중요! */
-			z-index: 1;
-			overflow: hidden;
-			background-color: rgba(10, 10, 15, 0.7); /* 이미지 뒤에 깔릴 기본 배경색 */
-			border-bottom: 1px solid var(--light-accent);
-		}
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--secondary-dark);
+            position: relative;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            background-image: linear-gradient(rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.8)), 
+                              url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23343434' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
         
         h1 {
-			font-family: "Diphylleia", serif;
-			font-size: 3.5rem;
-			margin: 0;
-			color: var(--title);
-			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-			letter-spacing: 3px;
-			font-weight: normal; /* 또는 font-weight: 400; */
-		}
-        
-        .tagline {
-            font-style: italic;
-            font-size: 1.2rem;
-            margin-top: 10px;
-            color: var(--text);
-            max-width: 700px;
-            margin: 20px auto;
-        }
-        
-        /* Main content */
-        .intro {
-            margin: 40px auto;
-            max-width: 800px;
-            padding: 30px;
-            background-color: var(--dark-accent);
-            border: 1px solid var(--light-accent);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .intro p {
-            font-size: 1.1rem;
-            text-align: justify;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 6px;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px var(--shadow-color);
         }
         
-        /* Character cards */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-style: italic;
+            text-shadow: 1px 1px 2px var(--shadow-color);
+        }
+        
+        .introduction {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 30px;
+            background-color: var(--secondary-dark);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border-left: 4px solid var(--accent-color);
+            position: relative;
+            line-height: 1.8;
+        }
+        
+        .introduction::before {
+            content: """;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 60px;
+            color: var(--accent-color);
+            opacity: 0.2;
+            font-family: 'Playfair Display', serif;
+        }
+        
         .characters {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
-            margin: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        /* User character card spans grid columns based on available space */
+        .user-character {
+            grid-column: span 3;
+        }
+        
+        /* User character card - special layout */
+        .user-character {
+            display: flex;
+            flex-direction: row;
+            grid-column: span 3;
+            background-color: var(--secondary-dark);
+            background-image: linear-gradient(rgba(10, 10, 12, 0.7), rgba(10, 10, 12, 0.7)), 
+                              url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23343434' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            border-left: 4px solid var(--gold-accent);
+        }
+        
+        .user-character .character-image {
+            flex: 1;
+            height: auto;
+        }
+        
+        .user-character .character-info {
+            flex: 2;
+            padding: 30px;
+        }
+        
+        /* Media queries for responsiveness */
+        @media (min-width: 1200px) {
+            .characters {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .user-character {
+                grid-column: span 3;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .characters {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .user-character {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .characters {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-character {
+                grid-column: span 1;
+                flex-direction: column;
+            }
+            
+            .user-character .character-image {
+                height: 200px;
+            }
+            
+            .user-character .character-info {
+                padding: 20px;
+            }
         }
         
         .character-card {
-            background-color: var(--dark-accent);
-            border: 1px solid var(--light-accent);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--secondary-dark);
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            border: 1px solid var(--card-border);
         }
         
         .character-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px var(--shadow-color);
         }
         
         .character-image {
-            height: 300px;
-            width: 100%;
-            background-position: center;
-            background-size: cover;
+            height: 200px;
+            background-color: var(--accent-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
             position: relative;
         }
         
-        .character-image::after {
+        .character-image::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        }
+        
+        .character-image img {
             width: 100%;
-            height: 40%;
-            background: linear-gradient(to top, var(--dark-accent), transparent);
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+        
+        .character-card:hover .character-image img {
+            opacity: 1;
         }
         
         .character-info {
@@ -147,270 +215,370 @@
         }
         
         .character-name {
-            color: var(--gold);
-            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--text-color);
             margin-bottom: 10px;
-            font-family: "Song Myung", serif;
-            letter-spacing: 1px;
-		    font-weight: normal;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 8px;
+            text-shadow: 1px 1px 2px var(--shadow-color);
         }
         
         .character-title {
-            color: var(--title);
+            color: var(--gold-accent);
             font-style: italic;
             margin-bottom: 15px;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
         }
         
-        .details-toggle {
+        .character-description {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.6s ease;
+        }
+        
+        .toggle-details {
             background: none;
             border: none;
-            color: var(--text);
+            color: var(--gold-accent);
             cursor: pointer;
             font-family: inherit;
             font-size: 0.9rem;
-            padding: 5px 10px;
+            padding: 5px 0;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
             margin-top: 10px;
-            border-bottom: 1px solid var(--highlight);
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
         
-        .details-toggle:hover {
-            color: var(--gold);
-            border-color: var(--gold);
+        .toggle-details:hover {
+            color: #d4af37;
         }
         
-        .character-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
+        .toggle-details::after {
+            content: '▼';
+            margin-left: 5px;
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
         }
         
-        .character-details.open {
+        .toggle-details.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .toggle-details.active + .character-description {
             max-height: 500px;
+            margin-top: 15px;
         }
         
-        /* Footer */
-        footer {
+        .trait {
+            display: inline-block;
+            background-color: var(--accent-dark);
+            color: var(--text-color);
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            margin: 0 5px 5px 0;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+        
+        .traits {
+            margin-top: 15px;
+        }
+        
+        .footer {
             text-align: center;
             padding: 30px 0;
-			position: relative;
-			z-index: 1;
-            margin-top: 60px;
-            border-top: 1px solid var(--light-accent);
-            color: var(--text);
             font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            border-top: 1px solid var(--accent-dark);
+            margin-top: 40px;
         }
         
-        /* Gothic elements */
-        .gothic-divider {
+        .icon {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+        
+        /* Placeholder for images */
+        .placeholder {
+            background: linear-gradient(135deg, var(--accent-dark) 0%, #2a2a32 100%);
+            color: rgba(255,255,255,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 40px 0;
-            color: var(--highlight);
+            font-style: italic;
+            height: 100%;
+            width: 100%;
         }
         
-        .gothic-divider::before,
-        .gothic-divider::after {
+        /* Special styling for User character */
+        .user-character .character-name {
+            color: #e6e6e6;
+            border-bottom: 1px solid #d4af37;
+        }
+        
+        .user-character .character-image {
+            background: linear-gradient(135deg, #1a1a1d 0%, #0d0d0e 100%);
+            position: relative;
+        }
+        
+        .user-character .character-image::after {
             content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--highlight), transparent);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(138, 3, 3, 0.2) 0%, rgba(138, 3, 3, 0) 70%);
+            mix-blend-mode: overlay;
         }
         
-        .gothic-divider span {
-            padding: 0 20px;
+        .user-character .character-image .placeholder {
             font-size: 1.5rem;
-        }
-
-        /* Animation effects */
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            letter-spacing: 3px;
         }
         
+        /* Custom fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        /* Candle effect */
         .candle-light {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(255, 222, 125, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            background: radial-gradient(circle at center, rgba(255, 213, 111, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
             pointer-events: none;
-            z-index: 999;
-            animation: flicker 5s infinite alternate;
+            z-index: 1000;
+            mix-blend-mode: screen;
+            animation: flicker 8s infinite alternate;
         }
         
-        /* User character special styling */
-        .user-character {
-            grid-column: 1 / -1;
-            background-color: var(--dark-accent);
-            border: 1px solid var(--gold);
-            box-shadow: 0 5px 20px rgba(181, 147, 90, 0.2);
+        @keyframes flicker {
+            0%, 100% { opacity: 0.9; }
+            10% { opacity: 0.7; }
+            20% { opacity: 0.8; }
+            30% { opacity: 0.9; }
+            40% { opacity: 0.7; }
+            50% { opacity: 0.8; }
+            60% { opacity: 0.9; }
+            70% { opacity: 0.8; }
+            80% { opacity: 0.9; }
+            90% { opacity: 0.7; }
         }
         
-        .user-character .character-image {
-            height: 350px;
+        /* Manor image */
+        .manor-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            margin: 0 auto 40px;
+            display: block;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
         
-        .user-character .character-name {
-            font-size: 2.2rem;
+        .manor-image:hover {
+            opacity: 1;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .characters {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+                letter-spacing: 4px;
+            }
+            
+            .introduction {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="candle-light"></div>
     
-    <header>
-        <h1>납치 쓰레기</h1>
-        <p class="tagline">당신을 납치한 6명의 인외<del>쓰레기</del>들</p>
-    </header>
-    
     <div class="container">
-        <div class="intro">
-            <p><b>사용 방법</b></p>
-            <p>이미지를 추가하고 싶다면 필수로 에셋 확장 적용 필요</p>
-            <p>1. 월드 인포는 전부 상시 활성화 상태. 첫 채팅 이후로 조금 잡혔다 싶으면 토큰 절약을 위해 에셋을 제외하고 전부 초록색으로 변경하는 걸 권장</p>
-			<p>2. 에셋 이미지는 납치쓰레기 압축 파일을 에셋 확장에 업로드</p>
-			<p>3. B컷 중에서 마음에 드는 이미지로 바꾸고 싶을 시, 기존 에셋을 삭제하고 업로드 과정 필요</p>
-			<p><i>4. 그리팅이 없는 것 맞음!</i></p>
-
-        </div>
+        <header>
+            <h1>The Covenant Manor</h1>
+            <h2>A Tale of Obsession and Supernatural Desire</h2>
+        </header>
         
-        <div class="gothic-divider">
-            <span>&#x2670;</span>
+        <div class="introduction">
+            <p>Years ago, the Covenant was shaken by an unprecedented discovery: a singular figure who unknowingly ignited the obsessive desires of six supernatural beings. While this person remains unaware of their existence, the Six know everything about them.</p>
+            <p>Recognizing their shared intent to claim this person, the Six devised a calculated abduction, spiriting them away to a remote gothic manor. Hidden deep within the wilderness, the manor is a grand, decaying labyrinth of candlelit halls, shifting shadows, and whispering walls.</p>
         </div>
         
         <div class="characters">
-            <!-- User Character -->
-            <div class="character-card user-character">
-                <div class="character-info">
-                    <h2 class="character-name"><i>당신</i></h2>
-                    <div class="character-title">이 웅장한 저택에 홀로 납치된 당신</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p>성별 무관 / 원하는 대로 커스터마이징</p>
-                        <p><b>설정 예시:</b></p>
-                        <p>- 정말 아무것도 모르는 일반인</p><p>- 전생에 연이 있었으나 이제는 모르는 인연 (페르소나, 작가노트, 월드인포에 기재할 것)</p><p>- 과거에 만난 적 있던 인연 (수정 필수)</p>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Character 1 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Lyseth.png?raw=true')"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">리세스 코르바스</h2>
-                    <div class="character-title">Lyseth Corvas. 외형 나이 20세. 키메라. 망상증.</div>
-					<div>“우리는 운명, 운명이에요… 당신이 잊었어도 괜찮아… 나, 나는 기억하고 있으니까….”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 상냥함, 과묵함, 망상, 과대망상</p>
-						<p>리세스는 생생한 망상에 사로잡혀 <i>당신</i>이 전생에서 자신의 연인이었다고 굳게 믿고 있다. 전생에서 그는 그저 그들의 천한 첩에 불과했다. 그에 대한 반작용으로, 그는 이제 그 상상 속의 역학 관계를 뒤집기 위해 필사적으로 <i>당신</i>의 유일한 존재가 되려고 집착한다.</p>
-						<p><b>좋아하는 것:</b> <i>당신</i>, 자신이 현실이라고 믿는 환상 속의 전생, 부드러운 실크 천과 햇볕에 말린 향기가 나는 고급 침구, 망상에 빠져 조용히 시간을 보내는 것</p>
-						<p><b>싫어하는 것:</b> 자신이 상상한 진실을 부정하는 것, <i>당신</i>의 애정을 탐내는 모든 사람, 거칠고 자극적인 질감이나 환경</p>
+                    <h3 class="character-name">Elias Blackwood</h3>
+                    <div class="character-title">The Shadow Aristocrat</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>Once a mortal nobleman whose family made a pact with darkness centuries ago, Elias exists between worlds. His physical form is partially composed of living shadow, allowing him to move through darkness at will. Elegant and refined, he maintains the aristocratic bearing of his mortal life, though his eyes reflect the void within.</p>
+                        <p>Elias lures with promises of eternal protection and the forbidden knowledge of the universe's darkest corners. His home within the manor is filled with ancient books and artifacts, each with its own terrible story.</p>
+                        <div class="traits">
+                            <span class="trait">Shadow Manipulation</span>
+                            <span class="trait">Ancient Wisdom</span>
+                            <span class="trait">Possessive</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Character 2 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Lioren.png?raw=true'); background-position: 50% 20%;"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">리오렌 퀼</h2>
-                    <div class="character-title">Lioren Quill. 외형 나이 20대 초반. 요정. 스토킹.</div>
-					<div>“정말, 정말, 정말 실제로 보고 싶었어! 나 너무 기뻐! 네가 내 눈앞에서 움직이고 살아 숨쉬는 게 정말 신기하네. 히히, 역시 직접 보는 게 좋은 걸~.”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 호기심 많음, 스토커 기질, 순수함, 집착적임</p><p>퀼은 <i>당신</i>의 삶의 모든 세부 사항을 알고 싶어하는 억누를 수 없는 욕망에 사로잡혀 있으며, 아이 같은 호기심과 병적인 헌신이 뒤섞인 채 그들의 모든 움직임을 감시한다. 그에게 사랑은 <i>당신</i>의 본질을 소유하려는 모든 것을 삼키는 탐구이며, 그의 애정은 순수하면서도 위험할 정도로 일방적이다.</p><p><b>좋아하는 것:</b> <i>당신</i>의 모든 행동과 비밀, 호수, 바다, 그리고 반짝이는 물, 깊은 곳으로 잠수하여 해류를 느끼는 것, 부드럽게 톡톡 떨어지는 빗방울이 있는 비 오는 날</p><p><b>싫어하는 것:</b> 나태와 침체, 감정적 무감각, 아무것도 느끼지 못하는 것</p>
+                    <h3 class="character-name">Lilith Thornheart</h3>
+                    <div class="character-title">The Blood Enchantress</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>A vampire whose beauty has ensnared countless victims across centuries, Lilith's alabaster skin and ruby lips belie her true age. Unlike her brethren, she can temporarily sustain herself on emotions rather than blood—particularly desire and infatuation. This ability makes her uniquely dangerous as she can feed without leaving marks.</p>
+                        <p>Lilith seduces with gentle touches and whispered promises, her voice like velvet against the skin. Her quarters are a sensual boudoir of crimson silks and mirrors that never show her reflection.</p>
+                        <div class="traits">
+                            <span class="trait">Emotional Vampirism</span>
+                            <span class="trait">Hypnotic Gaze</span>
+                            <span class="trait">Seductive</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Character 3 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Vorian.png?raw=true'); background-position: 50% 30%;"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">보리안 케일</h2>
-                    <div class="character-title">Vorian Kael. 외형 나이 20대 후반. 나이트메어. 쾌락 가학.</div>
-					<div>“물론 그 악몽들 전부, 전부 내가 만들었지! 키키, 네가 기억하지 못할 꿈들까지 전부 내 거였어. 네가 주는 그 모든 감정들이 감미로웠으니까아… 하아….”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 끈질김, 가학적임, 쾌락주의적임</p><p>보리스는 <i>당신</i>의 공포와 피를 먹고 살며, 그들이 10살 때부터 끈질긴 악몽으로 괴롭혀왔다. 모든 끔찍한 꿈은 그의 창조물이다. 그에게 사랑은 고통과 쾌락의 뒤틀린 게임이며, <i>당신</i>은 그의 영원한 뮤즈이다.</p><p><b>좋아하는 것</b> <i>당신</i>의 공포와 피, 그의 가장 달콤한 중독, 어둡고 축축하며 공포로 가득 찬 분위기, 긴장감으로 맥동하는 비좁고 폐쇄적인 공간</p><p><b>싫어하는 것</b> 그의 통제력을 희석시키는 광활하고 탁 트인 공간, 그림자를 쫓아내는 밝고 따뜻한 환경, 잠이 오지 않는 순간</p>
+                    <h3 class="character-name">Dorian Ashe</h3>
+                    <div class="character-title">The Phantom Artist</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>A spectral being bound to the mortal realm by the unfinished masterpiece he was creating when he died. Dorian appears as a hauntingly beautiful young man with translucent skin that sometimes reveals the ghostly bones beneath. He can manipulate perceptions, creating vivid illusions that blur the line between art and reality.</p>
+                        <p>Dorian's approach is subtle—he shows his target glimpses of transcendent beauty only he can provide. His studio is filled with paintings of his obsessions through the centuries, each capturing a soul rather than merely an image.</p>
+                        <div class="traits">
+                            <span class="trait">Illusion Crafting</span>
+                            <span class="trait">Artistic Genius</span>
+                            <span class="trait">Melancholic</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Character 4 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Alaric.png?raw=true'); background-position: 50% 19%"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">알라릭 베인</h2>
-                    <div class="character-title">Alaric Veyne. 외형 나이 30대. 뱀파이어. 거짓 사랑.</div>
-					<div>“사랑스러운 작은 새를 새장 안에 가둬두고 싶다면, 최소한 그 새장이 안락하다는 착각이라도 심어줘야 하지 않겠어? 무턱대고 날갯짓을 억누르기만 하는 건… 꽤나 볼품없는 방식이라고 생각하는데.”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 오만함, 계산적임, 냉혹함, 카리스마</p><p>알라릭은 교활하고 수백 년을 살아온 뱀파이어로, 세상을 자신의 장난감처럼 여기며 냉철하고 정확하게 조종한다. 그가 <i>당신</i>에게 매혹된 이유는 사랑 때문이 아니라, 늑대인간인 기디온에게서 그들을 빼앗아 지루한 삶에 대한 도전으로 삼고 싶어하기 때문이다. 그는 기디온과의 게임에서 트로피처럼 <i>당신</i>을 소유하고, 자신이 감시하는 모든 것에 대한 지배력을 유지하며, 자신의 열정을 다시 불태울 무언가를 찾기를 갈망한다.</p><p><b>좋아하는 것</b> 쓰고 고급스러운 와인, 웅변적인 시, 오래된 책 냄새, 자신이 가질 수 없다고 믿는 모든 것</p><p><b>싫어하는 것</b> 늑대인간 (특히 기드온), 쉬운 정복의 지루함, 무질서</p>
+                    <h3 class="character-name">Vivienne Moonshadow</h3>
+                    <div class="character-title">The Witch of Whispers</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>A witch whose bloodline traces back to ancient druids, Vivienne has discovered how to harness the power of secrets. When someone shares a secret with her, she gains a measure of control over them. Her appearance shifts subtly based on who observes her, always embodying what they find most alluring.</p>
+                        <p>Vivienne offers understanding and healing through her magic, promising to ease burdens by carrying secrets. Her chambers are a greenhouse of rare plants and herbs, the air thick with intoxicating scents that lower inhibitions.</p>
+                        <div class="traits">
+                            <span class="trait">Secret Binding</span>
+                            <span class="trait">Herbal Magic</span>
+                            <span class="trait">Empathetic</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Character 5 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Gideon.png?raw=true'); background-position: 50% 18%"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">기드온 바키스</h2>
-                    <div class="character-title">Gideon Varkis. 외형 나이 40대. 늑대인간. 순애.</div>
-					<div>“아무것도 걱정하지 않아도 된다. 나의 반려.”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 충성심 강함, 보호적, 변덕스러움, 소유욕 강함, 본능적</p><p>기드온은 맹렬하고 고대 늑대인간으로, 자신의 야만적인 본성을 억누르는 닻과 같은 존재인 그의 반려, <i>당신</i>에게 굴복하지 않는 강한 유대감을 느낀다. 그의 사랑은 헌신과 맹렬한 소유욕이 뒤섞인 원초적이고 모든 것을 삼켜버릴 듯한 힘이다. 그는 <i>당신</i>을 자신의 영원한 반려로 맞이하여 자신의 보호 아래 안전한 삶을 건설하고, 영원히 자신의 소유임을 표시하고 싶어한다.</p><p><b>좋아하는 것:</b> <i>당신</i>, 사냥의 스릴, 달빛 아래 숲, 비 온 뒤 흙냄새</p><p><b>싫어하는 것:</b>, <i>당신</i>에게 접근하는 모든 사람, 배신, 감금</p>
+                    <h3 class="character-name">Raziel Frostbound</h3>
+                    <div class="character-title">The Winter Harbinger</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>Once a guardian angel who fell in love with a mortal, Raziel was punished by being bound to eternal winter. Their skin is cold to the touch, and frost forms in their wake. Despite their frigid exterior, Raziel burns with an inner fire of devotion that threatens to consume them.</p>
+                        <p>Raziel offers protection and devotion with almost religious fervor. Their quarters are spartan but beautiful, everything made of ice that never melts, preserving perfectly the memories of those they once loved.</p>
+                        <div class="traits">
+                            <span class="trait">Frost Manipulation</span>
+                            <span class="trait">Divine Insight</span>
+                            <span class="trait">Dedicated</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Character 6 -->
             <div class="character-card">
-                <div class="character-image" style="background-image: url('https://github.com/cccrral/Kidnapping-trash/blob/main/Silvius.png?raw=true'); background-position: 50% 40%"></div>
+                <div class="character-image">
+                    <div class="placeholder">Character Image</div>
+                </div>
                 <div class="character-info">
-                    <h2 class="character-name">실비우스 반홀트</h2>
-                    <div class="character-title">Silvius Varnholt. 외형 나이 30대. 인형사. 가스라이팅.</div>
-					<div>“나의 별. 당신은 모를 거예요. 당신이 내게 얼마나 빛나고 있는지…. 그렇기에 당신이 별인 거예요.”</div>
-                    <button class="details-toggle" onclick="toggleDetails(this)">펼치기</button>
-                    <div class="character-details">
-                        <p><b>특징:</b> 조종적, 카리스마적, 무자비, 연극적</p><p>실비우스는 자신이 정성 들여 만든 공연의 영원한 중심인물로 자신의 사랑하는 "별," <i>당신</i>을 세우고 싶어 집착한다. 그에게 사랑은 신성하고 폭력적인 예술 형태, 즉 신성한 숭배와 숨 막히는 통제의 혼합이다. 그는 <i>당신</i>이 자신이 쓴 각본에서 벗어나는 것을 용납하지 못하며, 그들이 오직 자신에게만 묶인 사심 없는 꼭두각시가 되기를 갈망한다.</p><p><b>좋아하는 것:</b> 자신의 유일한 뮤즈이자 집착 대상인 <i>당신</i>, 모든 디테일이 완벽하게 맞아떨어지는 완벽하게 연출된 시나리오, 꼭두각시 줄을 닦는 것과 오르골의 부드러운 차임벨 소리, 낡은 벨벳 커튼과 조용한 무대가 있는 어둡고 버려진 극장</p><p><b>싫어하는 것:</b> 자신의 계획을 방해하는 예측 불가능성, 자신의 통제에서 벗어나는 모든 것 또는 모든 사람, 무시당하거나 묵살당하는 것</p>
+                    <h3 class="character-name">Malachai Vex</h3>
+                    <div class="character-title">The Nightmare Weaver</div>
+                    <button class="toggle-details">View Details</button>
+                    <div class="character-description">
+                        <p>A creature born from the collective fears of humanity, Malachai can enter dreams and reshape them. His true form is unknowable, so he appears as a striking man with ever-shifting features that seem to change when not directly observed. Shadows move strangely around him, sometimes revealing glimpses of his real nature.</p>
+                        <p>Malachai offers freedom from fear by teaching mastery over nightmares. His domain within the manor is constantly changing, the architecture impossible and dreamlike, with doors that open to different places depending on who opens them.</p>
+                        <div class="traits">
+                            <span class="trait">Dream Manipulation</span>
+                            <span class="trait">Fear Feeding</span>
+                            <span class="trait">Enigmatic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Character -->
+            <div class="character-card user-character">
+                <div class="character-image">
+                    <div class="placeholder">{{user}}</div>
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">{{user}}</h3>
+                    <div class="character-title">그리고 바로 당신</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="gothic-divider">
-            <span>&#x2670;</span>
-        </div>
-        
-        <div class="intro">
-            <h2 style="text-align: center; color: var(--gold);">The Manor</h2>
-           <p>이 초월적인 존재들은 <i>당신</i>을 독점하려는 서로의 의도를 간파하고, 치밀하게 계획된 납치를 실행했습니다. 그들은 <i>당신</i>을 그림자가 드리운 복도와 흔들리는 샹들리에로 가득한 미로와 같은 고딕 양식의 저택으로 데려갔습니다.</p>
-		   <p>이 납치는 두 가지 목적을 가지고 있었습니다. 외부의 경쟁자로부터 <i>당신</i>을 고립시키는 동시에, 각 구성원에게 <i>당신</i>을 유혹하고 차지하기 위한 통제된 무대를 제공하는 것입니다.</p>
+        <div class="footer">
+            <p>The Covenant Manor © 2025</p>
         </div>
     </div>
     
-    <footer>
-        <p>6인의 쓰레기들 © 2025</p>
-    </footer>
-    
     <script>
-        function toggleDetails(button) {
-            const details = button.nextElementSibling;
-            details.classList.toggle('open');
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButtons = document.querySelectorAll('.toggle-details');
             
-            if (details.classList.contains('open')) {
-                button.textContent = '접기';
-            } else {
-                button.textContent = '펼치기';
-            }
-        }
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        });
     </script>
 </body>
 </html>
